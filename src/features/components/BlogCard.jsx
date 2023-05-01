@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDeleteBlogMutation } from "../services/blogApi";
 
 const BlogCard = ({ blog }) => {
+  const [deleteBlog] = useDeleteBlogMutation();
   // const {data}
   const { title, id, image, desc } = blog;
   // console.log(title)
+
+  const deleteing = () => {
+    deleteBlog(id);
+    console.log('delete successfully')
+  };
   return (
     <div className=" shadow-xl">
       <img src={image} className=" w-[250px]" alt="" />
@@ -15,7 +22,12 @@ const BlogCard = ({ blog }) => {
             Detail
           </button>
         </Link>
-        <button className=" bg-red-500 py-1 px-3 text-gray-200 ">Delete</button>
+        <button
+          onClick={deleteing}
+          className=" bg-red-500 py-1 px-3 text-gray-200 "
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
